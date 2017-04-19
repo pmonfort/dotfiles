@@ -21,8 +21,8 @@
 [merge]
   tool = vimdiff
 [user]
-  name = German Monfort
-  email = german.monfort@gmail.com
+  name = Pablo Monfort
+  email = pmonfort@gmail.com
 [rerere]
   enabled = false
 [giggle]
