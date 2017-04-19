@@ -108,7 +108,8 @@ imap <f7> <esc><f7>
 noremap <C-BS> :bdelete<CR>
 noremap <S-Up> :bnext<CR>
 noremap <S-Down> :bprev<CR>
-noremap <F1> :E<CR>
+noremap <S-e> :E<CR>
+noremap <S-w> :w<CR>
 noremap <F9> :source ~/.vimrc<CR>
 noremap <S-F9> :e ~/.vimrc<CR>
 
@@ -168,10 +169,10 @@ if has("autocmd")
     autocmd FileType html,haml    set sw=2 ts=2 sts=2 et
 
     " Debugger
-    autocmd FileType ruby         nnoremap <Leader>d orequire "ruby-debug"; debugger; ""<Esc>
-    autocmd FileType ruby         nnoremap <Leader>D orequire "debugger"; debugger; ""<Esc>
-    autocmd FileType haml         nnoremap <Leader>d o- require "ruby-debug"; debugger; ""<Esc>
-    autocmd FileType haml         nnoremap <Leader>D o- require "debugger"; debugger; ""<Esc>
+    autocmd FileType ruby         nnoremap <Leader>d orequire "byebug"; byebug<Esc>
+    autocmd FileType ruby         nnoremap <Leader>D orequire "byebug"; byebug<Esc>
+    autocmd FileType haml         nnoremap <Leader>d o- require "byebug"; byebug<Esc>
+    autocmd FileType haml         nnoremap <Leader>D o- require "byebug"; byebug<Esc>
 
     autocmd FileType ruby
             \ if has("balloon_eval") |
@@ -206,6 +207,10 @@ noremap <S-F1> :call Chdir(g:directory)<CR>
 
 hi Normal guibg=black guifg=GhostWhite
 hi NonText guibg=black
+
+" let g:vimrubocop_config = '/path/to/rubocop.yml'
+" let g:vimrubocop_keymap = 0
+" nmap <Leader>r :RuboCop<CR>
 
 " some TIPS:
 "
