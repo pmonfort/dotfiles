@@ -105,10 +105,10 @@ imap <f8> <esc><f8>
 map <f7> <c-w>k<c-w>_
 imap <f7> <esc><f7>
 
-noremap <C-BS> :bdelete<CR>
+noremap <C-BS> :bd<CR>
+noremap <S-e> :E<CR>
 noremap <S-Up> :bnext<CR>
 noremap <S-Down> :bprev<CR>
-noremap <S-e> :E<CR>
 noremap <S-w> :w<CR>
 noremap <F9> :source ~/.vimrc<CR>
 noremap <S-F9> :e ~/.vimrc<CR>
@@ -208,9 +208,14 @@ noremap <S-F1> :call Chdir(g:directory)<CR>
 hi Normal guibg=black guifg=GhostWhite
 hi NonText guibg=black
 
-" let g:vimrubocop_config = '/path/to/rubocop.yml'
-" let g:vimrubocop_keymap = 0
-" nmap <Leader>r :RuboCop<CR>
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
+
+map <S-n> :NERDTreeToggle<CR>
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()
 
 " some TIPS:
 "
