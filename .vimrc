@@ -95,15 +95,15 @@ nmap gb :bn<CR>
 nmap gB :bp<CR>
 
 " switchers
-nmap <Leader>i :set ignorecase!<CR>
-nmap <Leader>n :set number!<CR>
-nmap <Leader>w :set wrap!<CR>
+" nmap <Leader>i :set ignorecase!<CR>
+" nmap <Leader>n :set number!<CR>
+" nmap <Leader>w :set wrap!<CR>
 
 " switch between splits through f7 and f8
-map <f8> <c-w>j<c-w>_
-imap <f8> <esc><f8>
-map <f7> <c-w>k<c-w>_
-imap <f7> <esc><f7>
+" map <f8> <c-w>j<c-w>_
+" imap <f8> <esc><f8>
+" map <f7> <c-w>k<c-w>_
+" map <f7> <esc><f7>
 
 noremap <C-BS> :bd<CR>
 noremap <S-e> :E<CR>
@@ -210,12 +210,6 @@ hi NonText guibg=black
 
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
-
-map <S-n> :NERDTreeToggle<CR>
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()
 
 " some TIPS:
 "
