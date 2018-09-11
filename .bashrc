@@ -43,11 +43,6 @@ if [[ -n "$PS1" ]]; then
     if [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
-
-    # if [ -f ~/.git-completion.sh ]; then
-    #     . ~/.git-completion.sh
-    # fi
-
     [[ "$OSTYPE" =~ "linux" ]] && xhost +LOCAL:
 
     # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/dist-packages
@@ -55,8 +50,8 @@ if [[ -n "$PS1" ]]; then
     export HOSTNAME=`/bin/hostname`
     # dh_make variables
     if [[ "$OSTYPE" =~ "linux" ]]; then
-        export DEBFULLNAME="German A. Monfort"
-        export DEBEMAIL=german.monfort@gmail.com
+        export DEBFULLNAME="Pablo Monfort"
+        export DEBEMAIL=pmonfort@gmail.com
     fi
 
     # export PATH="$PATH:~/bin"
@@ -162,14 +157,6 @@ if [[ -n "$PS1" ]]; then
         pg_dump "$database" | gzip > "$dumpname"
     }
 
-    # Cucumber
-    alias rf='rake features'
-
-    # For running specific features.
-    function cuke {
-        bundle exec cucumber --require features/support --require features/step_definitions "$1"
-    }
-
     ################################################################################
     #                                                                              #
     #                                     Prompt                                   #
@@ -179,21 +166,12 @@ if [[ -n "$PS1" ]]; then
     # Prompt in two lines:
     #   <hostname> <full path to pwd> (git: <git branch>)
     #   ▸
-    # export PS1='\[\033[01;32m\]\h \[\033[01;33m\]\w$(__git_ps1 " \[\033[01;36m\]\
-        #   (git: %s)")\[\033[01;37m\]\n▸\[\033[00m\] '
 
-    # PS1='\[\033[01;30m\][ \[\033[01;31m\]\u \[\033[01;30m\]]\[\033[01;34m\]\w\[\033[00m\]\$ '
+    parse_git_branch() {
+      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    }
 
-    export PS1='\[\033[01;30m\][ \[\033[01;31m\]\u \[\033[01;30m\]] \[\033[01;33m\]\w $(__git_ps1 "\[\033[01;36m\](git: %s)")\[\033[01;37m\]\n▸\[\033[00m\] '
-
-    ################################################################################
-    #                                                                              #
-    #                                     Java                                     #
-    #                                                                              #
-    ################################################################################
-    if [[ "$OSTYPE" =~ "linux" ]]; then
-    	export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-    fi
+    export PS1='\[\033[01;30m\][ \[\033[01;31m\]\u \[\033[01;30m\]] \[\033[01;33m\]\d - \T \[\033[01;36m\]\w\[\033[01;31m\]$(parse_git_branch) \[\033[01;37m\]\n▸\[\033[00m\] '
 fi
 
 # RVM ruby version system
@@ -211,6 +189,7 @@ if [[ "$OSTYPE" =~ "darwin" ]]; then
     . /usr/local/git/contrib/completion/git-completion.bash
     . /usr/local/git/contrib/completion/git-prompt.sh
 fi
+
 # NOTES
 #######################################################
 # To temporarily bypass an alias, we preceed the command with a \ 
