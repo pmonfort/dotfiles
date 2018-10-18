@@ -198,3 +198,8 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 if [[ -d  /usr/local/heroku/bin ]]; then
   export PATH="/usr/local/heroku/bin:$PATH"
 fi
+
+# Load rbenv automatically by appending
+# the following to ~/.bash_profile:
+
+eval "$(rbenv init -)"

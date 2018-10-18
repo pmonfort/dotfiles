@@ -124,8 +124,7 @@ noremap <Leader>g gg=G``
 " Execute current line as a vim script
 nnoremap <Leader>e "ayy :@a<CR>
 
-
-call pathogen#infect()
+execute pathogen#infect()
 
 "set runtimepath+=$GOROOT/misc/vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
