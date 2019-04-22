@@ -24,3 +24,4 @@ alias egrep='grep -Ern --color=auto'
 alias c='clear'
 alias hist='history | grep $1'
 
+alias git_rm_all="git branch | grep -v \"master\|develop\|current_branch\" | xargs git branch -D"
