@@ -19,3 +19,5 @@ export PATH
 # complete -o default -o nospace -W “$(grep “^Host” $HOME/.ssh/config | cut -d” ” -f2)” scp sftp ssh
 
 complete -o default -o nospace -W "$(grep "^Host" $HOME/.ssh/config | cut -d" " -f2)" scp sftp ssh
+
+eval "$(rbenv init -)"

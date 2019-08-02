@@ -192,8 +192,6 @@ fi
 # EG:  the ls command is aliased, but to use the normal ls command you would
 # type \ls
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 ### Added by the Heroku Toolbelt
 if [[ -d  /usr/local/heroku/bin ]]; then
   export PATH="/usr/local/heroku/bin:$PATH"
