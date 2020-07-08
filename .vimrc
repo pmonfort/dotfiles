@@ -37,7 +37,7 @@ set tenc=utf8
 
 set foldmethod=syntax
 set foldlevelstart=999 " leave all folds open per default
-set formatoptions=qrct
+" set formatoptions=qrct
 
 set guioptions-=T " no toolbar
 set guioptions-=m " no menus
@@ -106,14 +106,15 @@ nmap gB :bp<CR>
 " map <f7> <esc><f7>
 
 noremap <C-BS> :bd<CR>
-noremap <S-e> :E<CR>
+noremap <S-C-BS> :%bd\|e#<CR>
+noremap <S-e> :Ex<CR>
 noremap <S-Up> :bnext<CR>
 noremap <S-Down> :bprev<CR>
 noremap <S-w> :w<CR>
 noremap <F9> :source ~/.vimrc<CR>
 noremap <S-F9> :e ~/.vimrc<CR>
 
-vnoremap s' "zdi'<C-R>z'<ESC>
+vnorema s' "zdi'<C-R>z'<ESC>
 vnoremap s" "zdi"<C-R>z"<ESC>
 vnoremap < <gv
 vnoremap > >gv
@@ -154,7 +155,10 @@ if has("autocmd")
   augroup python
     au!
     autocmd FileType python set omnifunc=pythoncomplete#CompletePython
-    autocmd FileType python set sw=2 ts=2 sts=2
+    autocmd FileType python set sw=4 ts=4 sts=4
+    autocmd FileType python map <Leader>p :call flake8#Flake8()<CR>
+    autocmd FileType python nnoremap <Leader>d obreakpoint()<Esc>
+    autocmd FileType python nnoremap <Leader>D obreakpoint()<Esc>
   augroup END
 
   augroup ruby
@@ -246,3 +250,11 @@ nmap <Leader>r :RuboCop<CR>
 " :r!ls                           : reads in output of ls
 
 " "au BufWritePost   *.sh !chmod +x %
+
+" Handle line number
+:set number relativenumber
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END

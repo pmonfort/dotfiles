@@ -25,3 +25,5 @@ alias c='clear'
 alias hist='history | grep $1'
 
 alias git_rm_all="git branch | grep -v \"master\|develop\|current_branch\" | xargs git branch -D"
+
+alias init_python_env='~/dotfiles/python_virtualenv.sh'

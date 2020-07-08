@@ -1,3 +1,19 @@
+# RVM ruby version system
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+# [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
+export RUBY_GC_MALLOC_LIMIT=60000000
+export RUBY_FREE_MIN=200000
+
+if [[ "$OSTYPE" =~ "linux" ]]; then
+    export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4.1.0
+fi
+
+if [[ "$OSTYPE" =~ "darwin" ]]; then
+    . /usr/local/git/contrib/completion/git-completion.bash
+    . /usr/local/git/contrib/completion/git-prompt.sh
+fi
+
 if [[ -n "$PS1" ]]; then
 
     # Global path for cd (no matter which directory you're in right now)
@@ -13,7 +29,7 @@ if [[ -n "$PS1" ]]; then
     export HISTCONTROL=ignoredups
 
     # Ruby development made easier
-    export RUBYOPT="rubygems Ilib Itest Ispec"
+    export RUBYOPT="-r rubygems Ilib Itest Ispec"
 
     # Use vim to browse man pages. One can use Ctrl-[ and Ctrl-t
     # to browse and return from referenced man pages. ZZ or q to quit.
@@ -43,6 +59,7 @@ if [[ -n "$PS1" ]]; then
     if [ -f /etc/bash_completion ]; then
         . /etc/bash_completion
     fi
+
     [[ "$OSTYPE" =~ "linux" ]] && xhost +LOCAL:
 
     # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/dist-packages
@@ -167,23 +184,27 @@ if [[ -n "$PS1" ]]; then
     #   [username] Date - Time <full path to pwd> (git: <git branch>)
     #   ▸
 
-    export PS1='\[\033[01;30m\][ \[\033[01;31m\]\u \[\033[01;30m\]] \[\033[01;33m\]\d - \T \[\033[01;34m\]\w\[\033[01;36m\] $(__git_ps1 "(git: %s)") \[\033[01;37m\]\n▸\[\033[00m\] '
-fi
+    # The various escape codes that we can use to color our prompt.
+            RED="\[\033[0;31m\]"
+          GREEN="\[\033[0;32m\]"
+         PURPLE="\[\033[0;35m\]"
+     LIGHT_GRAY="\[\033[0;37m\]"
+           GRAY="\[\033[1;30m\]"
+      LIGHT_RED="\[\033[1;31m\]"
+    LIGHT_GREEN="\[\033[1;32m\]"
+         YELLOW="\[\033[1;33m\]"
+           BLUE="\[\033[1;34m\]"
+           CYAN="\[\033[1;36m\]"
+          WHITE="\[\033[1;37m\]"
+     COLOR_NONE="\[\e[0m\]"
 
-# RVM ruby version system
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+    DEFAULT_PS1="$GRAY[ $LIGHT_RED\u $GRAY] $YELLOW\d - \T $LIGHT_GREEN\w$BLUE $(__git_ps1 "(git: %s)") $WHITE\n▸$COLOR_NONE "
 
-export RUBY_GC_MALLOC_LIMIT=60000000
-export RUBY_FREE_MIN=200000
-
-if [[ "$OSTYPE" =~ "linux" ]]; then
-    export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4.1.0
-fi
-
-if [[ "$OSTYPE" =~ "darwin" ]]; then
-    . /usr/local/git/contrib/completion/git-completion.bash
-    . /usr/local/git/contrib/completion/git-prompt.sh
+    if [ $VIRTUAL_ENV_NAME ]; then
+      export PS1="$GRAY[$CYAN $VIRTUAL_ENV_NAME $GRAY]$DEFAULT_PS1"
+    else
+      export PS1=$DEFAULT_PS1
+    fi
 fi
 
 # NOTES
@@ -196,6 +217,10 @@ fi
 if [[ -d  /usr/local/heroku/bin ]]; then
   export PATH="/usr/local/heroku/bin:$PATH"
 fi
+
+delete_py_cache() {
+  find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+}
 
 # Load rbenv automatically by appending
 # the following to ~/.bash_profile:
