@@ -198,10 +198,10 @@ if [[ -n "$PS1" ]]; then
           WHITE="\[\033[1;37m\]"
      COLOR_NONE="\[\e[0m\]"
 
-    DEFAULT_PS1="$GRAY[ $LIGHT_RED\u $GRAY] $YELLOW\d - \T $LIGHT_GREEN\w$BLUE $(__git_ps1 "(git: %s)") $WHITE\n▸$COLOR_NONE "
+    DEFAULT_PS1="${GRAY}[ ${LIGHT_RED}\u ${GRAY}] ${YELLOW}\d - \T ${LIGHT_GREEN}\w${BLUE} \$(__git_ps1 '(git: %s)') ${WHITE}\n▸${COLOR_NONE} "
 
     if [ $VIRTUAL_ENV_NAME ]; then
-      export PS1="$GRAY[$CYAN $VIRTUAL_ENV_NAME $GRAY]$DEFAULT_PS1"
+      export PS1="${GRAY}[${CYAN} ${VIRTUAL_ENV_NAME} ${GRAY}]${DEFAULT_PS1}"
     else
       export PS1=$DEFAULT_PS1
     fi
