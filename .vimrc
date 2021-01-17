@@ -64,7 +64,9 @@ if &modifiable
 endif
 
 " use system registry by default
-set clipboard=unnamed
+" set clipboard=unnamed
+set clipboard=unnamedplus
+vnoremap <C-c> "+y
 
 " show tabs as blank-padded arrows, trailing spaces as middle-dots
 set list
@@ -72,15 +74,17 @@ set listchars=tab:→\ ,trail:·
 
 set tags=./tags,tags,~/commontags
 
+set background=dark
+colorscheme distinguished
+set t_Co=256
 if has("gui_running")
-  set guifont=Monaco:h12  " use this font
-  "colorscheme railscasts
-  colorscheme distinguished
+  " colorscheme railscasts
+  " let g:molokai_original = 1
+  " colorscheme molokai
+  " colorscheme gruvbox
+  " colorscheme distinguished
 else
   " colorscheme desert
-  set t_Co=256
-  set background=dark
-  colorscheme distinguished
 endif
 
 "
