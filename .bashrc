@@ -5,9 +5,9 @@
 export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
-if [[ "$OSTYPE" =~ "linux" ]]; then
-    export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4.1.0
-fi
+#if [[ "$OSTYPE" =~ "linux" ]]; then
+    # export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4.1.0
+#fi
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
     . /usr/local/git/contrib/completion/git-completion.bash
@@ -225,4 +225,5 @@ delete_py_cache() {
 # Load rbenv automatically by appending
 # the following to ~/.bash_profile:
 
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
