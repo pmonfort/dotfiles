@@ -9,3 +9,10 @@
 
 ### Run setup
 ./setup.sh
+
+### VIM
+Install pathogen bundle
+
+```
+git submodule update --init --recursive
+```
