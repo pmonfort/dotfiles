@@ -64,8 +64,11 @@ if &modifiable
 endif
 
 " use system registry by default
-" set clipboard=unnamed
-set clipboard=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
 vnoremap <C-c> "+y
 
 " show tabs as blank-padded arrows, trailing spaces as middle-dots
